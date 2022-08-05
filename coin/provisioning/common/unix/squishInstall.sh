@@ -3,37 +3,31 @@
 #############################################################################
 ##
 ## Copyright (C) 2020 The Qt Company Ltd.
-## Contact: https://www.qt.io/licensing/
+## Contact: http://www.qt.io/licensing/
 ##
 ## This file is part of the provisioning scripts of the Qt Toolkit.
 ##
-## $QT_BEGIN_LICENSE:LGPL$
+## $QT_BEGIN_LICENSE:LGPL21$
 ## Commercial License Usage
 ## Licensees holding valid commercial Qt licenses may use this file in
 ## accordance with the commercial license agreement provided with the
 ## Software or, alternatively, in accordance with the terms contained in
 ## a written agreement between you and The Qt Company. For licensing terms
-## and conditions see https://www.qt.io/terms-conditions. For further
-## information use the contact form at https://www.qt.io/contact-us.
+## and conditions see http://www.qt.io/terms-conditions. For further
+## information use the contact form at http://www.qt.io/contact-us.
 ##
 ## GNU Lesser General Public License Usage
 ## Alternatively, this file may be used under the terms of the GNU Lesser
-## General Public License version 3 as published by the Free Software
-## Foundation and appearing in the file LICENSE.LGPL3 included in the
-## packaging of this file. Please review the following information to
-## ensure the GNU Lesser General Public License version 3 requirements
-## will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
+## General Public License version 2.1 or version 3 as published by the Free
+## Software Foundation and appearing in the file LICENSE.LGPLv21 and
+## LICENSE.LGPLv3 included in the packaging of this file. Please review the
+## following information to ensure the GNU Lesser General Public License
+## requirements will be met: https://www.gnu.org/licenses/lgpl.html and
+## http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
 ##
-## GNU General Public License Usage
-## Alternatively, this file may be used under the terms of the GNU
-## General Public License version 2.0 or (at your option) the GNU General
-## Public license version 3 or any later version approved by the KDE Free
-## Qt Foundation. The licenses are as published by the Free Software
-## Foundation and appearing in the file LICENSE.GPL2 and LICENSE.GPL3
-## included in the packaging of this file. Please review the following
-## information to ensure the GNU General Public License requirements will
-## be met: https://www.gnu.org/licenses/gpl-2.0.html and
-## https://www.gnu.org/licenses/gpl-3.0.html.
+## As a special exception, The Qt Company gives you certain additional
+## rights. These rights are described in The Qt Company LGPL Exception
+## version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 ##
 ## $QT_END_LICENSE$
 ##
@@ -47,20 +41,20 @@ set -ex
 # This script will fetch and extract pre-buildt squish package for Linux and Mac.
 # Squish is need by Release Test Automation (RTA)
 
-version="6.7.2"
-qtBranch="62x"
+version="6.7-20210615-1349"
+qtBranch="61x"
 installFolder="/opt"
 squishFolder="$installFolder/squish"
 preBuildCacheUrl="ci-files01-hki.intra.qt.io:/hdd/www/input/squish/jenkins_build/stable"
-licenseFile=".squish-license"
-licenseUrl="http://ci-files01-hki.intra.qt.io/input/squish/coin/$licenseFile"
-licenseSHA="bda9c3bce2b9a74cb10ead9e87a4ebacd9eef4c2"
+licenseUrl="http://ci-files01-hki.intra.qt.io/input/squish/coin/515x/.squish-3-license"
+licenseSHA="e000d2f95b30b82f405b9dcbeb233cd43710a41a"
 if uname -a |grep -q Darwin; then
-    compressedFolder="prebuild-squish-$version-$qtBranch-mac.tar.gz"
-    sha1="6b7d80be4d107ba53ac9218fe5ca79f72c6e1e2d"
+    version="6.7-20210301-1401"
+    compressedFolder="prebuild-squish-$version-$qtBranch-macx86_64.tar.gz"
+    sha1="15f7f8e9944fdc36b9b6e37576d6ca96713a8ac5"
 else
      compressedFolder="prebuild-squish-$version-$qtBranch-linux64.tar.gz"
-     sha1="1f57efd6f21a994b07f28b0b44ff7972bbf51733"
+     sha1="e32e5db1713e3050c3cdce696d7509c468afc7d3"
 fi
 
 mountFolder="/tmp/squish"
@@ -102,10 +96,7 @@ sudo tar -xzf "$targetFileMount" --directory "$installFolder"
 echo "Unmounting $mountFolder"
 sudo diskutil unmount force "$mountFolder" || sudo umount -f "$mountFolder"
 
-sudo mv "$installFolder/rta_squish_$qtBranch" "$squishFolder"
-if uname -a |grep -q Darwin; then
-    sudo xattr -r -c "$squishFolder"
-fi
+sudo mv "$installFolder/rta_squish_$version" "$squishFolder"
 
 if uname -a |grep -q "Ubuntu"; then
     if [ ! -e "/usr/lib/tcl8.6" ]; then
@@ -115,12 +106,11 @@ if uname -a |grep -q "Ubuntu"; then
     fi
 fi
 
-
-DownloadURL "$licenseUrl" "$licenseUrl" "$licenseSHA" "$HOME/$licenseFile"
+DownloadURL "$licenseUrl" "$licenseUrl" "$licenseSHA" "$HOME/.squish-3-license"
 
 echo "Changing ownerships"
 sudo chown -R qt:$usersGroup "$squishFolder"
-sudo chown qt:$usersGroup "$HOME/$licenseFile"
+sudo chown qt:$usersGroup "$HOME/.squish-3-license"
 
 echo "Set commands for environment variables in .bashrc"
 if uname -a |grep -q "Ubuntu"; then

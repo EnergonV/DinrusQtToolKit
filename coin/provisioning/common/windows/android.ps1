@@ -1,37 +1,31 @@
 ############################################################################
 ##
-## Copyright (C) 2022 The Qt Company Ltd.
-## Contact: https://www.qt.io/licensing/
+## Copyright (C) 2020 The Qt Company Ltd.
+## Contact: http://www.qt.io/licensing/
 ##
 ## This file is part of the provisioning scripts of the Qt Toolkit.
 ##
-## $QT_BEGIN_LICENSE:LGPL$
+## $QT_BEGIN_LICENSE:LGPL21$
 ## Commercial License Usage
 ## Licensees holding valid commercial Qt licenses may use this file in
 ## accordance with the commercial license agreement provided with the
 ## Software or, alternatively, in accordance with the terms contained in
 ## a written agreement between you and The Qt Company. For licensing terms
-## and conditions see https://www.qt.io/terms-conditions. For further
-## information use the contact form at https://www.qt.io/contact-us.
+## and conditions see http://www.qt.io/terms-conditions. For further
+## information use the contact form at http://www.qt.io/contact-us.
 ##
 ## GNU Lesser General Public License Usage
 ## Alternatively, this file may be used under the terms of the GNU Lesser
-## General Public License version 3 as published by the Free Software
-## Foundation and appearing in the file LICENSE.LGPL3 included in the
-## packaging of this file. Please review the following information to
-## ensure the GNU Lesser General Public License version 3 requirements
-## will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
+## General Public License version 2.1 or version 3 as published by the Free
+## Software Foundation and appearing in the file LICENSE.LGPLv21 and
+## LICENSE.LGPLv3 included in the packaging of this file. Please review the
+## following information to ensure the GNU Lesser General Public License
+## requirements will be met: https://www.gnu.org/licenses/lgpl.html and
+## http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
 ##
-## GNU General Public License Usage
-## Alternatively, this file may be used under the terms of the GNU
-## General Public License version 2.0 or (at your option) the GNU General
-## Public license version 3 or any later version approved by the KDE Free
-## Qt Foundation. The licenses are as published by the Free Software
-## Foundation and appearing in the file LICENSE.GPL2 and LICENSE.GPL3
-## included in the packaging of this file. Please review the following
-## information to ensure the GNU General Public License requirements will
-## be met: https://www.gnu.org/licenses/gpl-2.0.html and
-## https://www.gnu.org/licenses/gpl-3.0.html.
+## As a special exception, The Qt Company gives you certain additional
+## rights. These rights are described in The Qt Company LGPL Exception
+## version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
 ##
 ## $QT_END_LICENSE$
 ##
@@ -46,10 +40,10 @@
 # That's why we need to use Andoid-21 API version in Qt 5.9.
 
 # NDK
-$ndkVersion = "r23b"
-$ndkCachedUrl = "\\ci-files01-hki.intra.qt.io\provisioning\android\android-ndk-$ndkVersion-windows.zip"
-$ndkOfficialUrl = "https://dl.google.com/android/repository/android-ndk-$ndkVersion-windows.zip"
-$ndkChecksum = "6e3fb50022c611a2b13d02f5de5c21cc7206a298"
+$ndkVersion = "r22b"
+$ndkCachedUrl = "\\ci-files01-hki.intra.qt.io\provisioning\android\android-ndk-$ndkVersion-windows-x86_64.zip"
+$ndkOfficialUrl = "https://dl.google.com/android/repository/android-ndk-$ndkVersion-windows-x86_64.zip"
+$ndkChecksum = "96ba1a049303cf6bf3ee84cfd64d6bcd43486a50"
 $ndkFolder = "c:\Utils\Android\android-ndk-$ndkVersion"
 $ndkZip = "c:\Windows\Temp\android_ndk_$ndkVersion.zip"
 
@@ -57,8 +51,8 @@ $ndkZip = "c:\Windows\Temp\android_ndk_$ndkVersion.zip"
 $toolsVersion = "2.1"
 $toolsFile = "commandlinetools-win-6609375_latest.zip"
 $sdkApi = "ANDROID_API_VERSION"
-$sdkApiLevel = "android-31"
-$sdkBuildToolsVersion = "31.0.0"
+$sdkApiLevel = "android-30"
+$sdkBuildToolsVersion = "30.0.3"
 $toolsCachedUrl= "\\ci-files01-hki.intra.qt.io\provisioning\android\$toolsFile"
 $toolsOfficialUrl = "https://dl.google.com/android/repository/$toolsFile"
 $toolsChecksum = "e2e19c2ff584efa87ef0cfdd1987f92881323208"
@@ -79,12 +73,13 @@ function Install($1, $2, $3, $4) {
 
 Write-Host "Installing Android NDK $nkdVersion"
 Install $ndkCachedUrl $ndkZip $ndkChecksum $ndkOfficialUrl
+Set-EnvironmentVariable "ANDROID_NDK_HOME" $ndkFolder
 Set-EnvironmentVariable "ANDROID_NDK_ROOT" $ndkFolder
 
 Install $toolsCachedUrl $sdkZip $toolsChecksum $sdkOfficialUrl
 New-Item -ItemType directory -Path $toolsFolder
 Move-Item -Path C:\Utils\Android\tools -Destination $toolsFolder\
-Set-EnvironmentVariable "ANDROID_SDK_ROOT" "C:\Utils\Android"
+Set-EnvironmentVariable "ANDROID_SDK_HOME" "C:\Utils\Android"
 Set-EnvironmentVariable "ANDROID_API_VERSION" $sdkApiLevel
 
 if (IsProxyEnabled) {

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qt3d" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qt3d/src/3rdparty/assimp/src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtactiveqt" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtandroidextras" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtcharts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtconnectivity" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtdatavis3d" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtdeclarative" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtdeclarative/tests/auto/qml/ecmascripttests/test262" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtdoc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtgamepad" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtgraphicaleffects" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtimageformats" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtlocation" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtlocation/src/3rdparty/mapbox-gl-native" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtlottie" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtmacextras" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtmultimedia" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtnetworkauth" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtpurchasing" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtqa" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtquick3d" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtquick3d/src/3rdparty/assimp/src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtquickcontrols" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtquickcontrols2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtquicktimeline" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtremoteobjects" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtrepotools" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtscript" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qtwebengine" vcs="Git" />
+  </component>
+</project>
