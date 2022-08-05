@@ -1,0 +1,22 @@
+QMAKE_CXX.QT_COMPILER_STDCXX = 201703L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 11
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 2
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
+QMAKE_CXX.INCDIRS = \
+    e:/dinrus/mingw64/include/c++/11.2.0 \
+    e:/dinrus/mingw64/include/c++/11.2.0/x86_64-w64-mingw32 \
+    e:/dinrus/mingw64/include/c++/11.2.0/backward \
+    e:/dinrus/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include \
+    e:/dinrus/mingw64/include \
+    e:/dinrus/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed \
+    e:/dinrus/mingw64/x86_64-w64-mingw32/include
+QMAKE_CXX.LIBDIRS = \
+    e:/dinrus/mingw64/lib/gcc/x86_64-w64-mingw32/11.2.0 \
+    e:/dinrus/mingw64/lib/gcc \
+    e:/dinrus/mingw64/x86_64-w64-mingw32/lib \
+    e:/dinrus/mingw64/lib
