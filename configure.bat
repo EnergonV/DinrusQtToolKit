@@ -26,11 +26,12 @@
 :: $QT_END_LICENSE$
 ::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
+chcp 65001
+perl %~dp0init-repository.pl
 set "srcpath=%~dp0"
 set "configure=%srcpath%qtbase\configure.bat"
 if not exist "%configure%" (
-    echo %configure% not found. Did you forget to run "init-repository"? >&2
+    echo %configure% не найден. Не правильно выполнен "init-repository"? >&2
     exit /b 1
 )
 

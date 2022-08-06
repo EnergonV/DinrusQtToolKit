@@ -16,7 +16,7 @@ include("${__qt6_qtbase_src_path}/cmake/QtAutoDetect.cmake")
 
 project(Qt
     VERSION "${QT_REPO_MODULE_VERSION}"
-    DESCRIPTION "Qt Libraries"
+    DESCRIPTION "Библиотеки Qt"
     HOMEPAGE_URL "https://qt.io/"
     LANGUAGES CXX C ASM
 )
@@ -50,14 +50,14 @@ if(NOT QT_BUILD_SUBMODULES)
         qt_internal_find_modules(QT_BUILD_SUBMODULES)
     endif()
 endif()
-set(QT_BUILD_SUBMODULES "${QT_BUILD_SUBMODULES}" CACHE STRING "Submodules to build")
+set(QT_BUILD_SUBMODULES "${QT_BUILD_SUBMODULES}" CACHE STRING "Отстраиваемые подмодули")
 
 qt_internal_sort_module_dependencies("${QT_BUILD_SUBMODULES}" QT_BUILD_SUBMODULES)
 
 foreach(module IN LISTS QT_BUILD_SUBMODULES)
     # Check for unmet dependencies
     if(NOT DEFINED BUILD_${module} OR BUILD_${module})
-        message(NOTICE "Checking dependencies of submodule '${module}'")
+        message(NOTICE "Проверка зависимостей подмодуля '${module}'")
         get_property(required_deps GLOBAL PROPERTY QT_REQUIRED_DEPS_FOR_${module})
         get_property(dependencies GLOBAL PROPERTY QT_DEPS_FOR_${module})
         foreach(dep IN LISTS dependencies)
@@ -73,19 +73,19 @@ foreach(module IN LISTS QT_BUILD_SUBMODULES)
 
             set(error_reason "")
             if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${dep}/CMakeLists.txt")
-                set(error_reason "${dep}'s CMakeLists.txt couldn't be found")
+                set(error_reason "${dep}'s CMakeLists.txt не обнаружен")
             elseif(DEFINED BUILD_${dep} AND NOT BUILD_${dep})
-                set(error_reason "building '${dep}' was explicitly disabled")
+                set(error_reason "построение '${dep}' явно отключено")
             endif()
 
             if(NOT error_reason STREQUAL "")
                 if(required)
-                    message(FATAL_ERROR "Module '${module}' depends on '${dep}', "
-                        "but ${error_reason}.\n"
-                        "Note: Use '-skip ${module}' to exclude it from the build.")
+                    message(FATAL_ERROR "Модуль '${module}' зависит от '${dep}', "
+                        "но ${error_reason}.\n"
+                        "Примечание: Используйте '-skip ${module}', чтобы исключить его из построения.")
                 else()
-                    message(NOTICE "Skipping optional dependency '${dep}' of '${module}', "
-                        "because ${error_reason}.")
+                    message(NOTICE "Пропуск необязательной зависимости '${dep}' у '${module}', "
+                        "так как ${error_reason}.")
                 endif()
             endif()
         endforeach()
@@ -93,7 +93,7 @@ foreach(module IN LISTS QT_BUILD_SUBMODULES)
 endforeach()
 
 foreach(module IN LISTS QT_BUILD_SUBMODULES)
-    message(NOTICE "Configuring submodule '${module}'")
+    message(NOTICE "Конфигурируется подмодуль '${module}'")
     ecm_optional_add_subdirectory("${module}")
 
     if(module STREQUAL "qtbase")

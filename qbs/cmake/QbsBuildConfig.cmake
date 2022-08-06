@@ -1,10 +1,10 @@
-option(WITH_TESTS "Build Tests" ON)
-option(WITH_UNIT_TESTS "Build Unit Tests" OFF)
-option(INSTALL_PUBLIC_HEADERS "Whether to install public headers" ON)
-option(QBS_ENABLE_RPATH "Whether to enable RPATH" ON)
-option(QBS_USE_BUNDLED_QT_SCRIPT "Whether to use bundled QtScript module" OFF)
+option(WITH_TESTS "Постройка тестов" ON)
+option(WITH_UNIT_TESTS "Постройка юнит-тестов" OFF)
+option(INSTALL_PUBLIC_HEADERS "Устанавливать ли публичные заголовочники" ON)
+option(QBS_ENABLE_RPATH "Активировать ли RPATH" ON)
+option(QBS_USE_BUNDLED_QT_SCRIPT "Использовать ли привязанный модуль QtScript" OFF)
 
-set(QBS_APP_INSTALL_DIR "bin" CACHE STRING "Relative install location for Qbs binaries.")
+set(QBS_APP_INSTALL_DIR "bin" CACHE STRING "Относительное установочное положение библиотек Qbs.")
 # default paths
 set(QBS_LIBDIR_NAME "lib")
 if(WIN32)
